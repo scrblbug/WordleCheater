@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordleCheater</string>
+    <string name="add_word_try">Add</string>
+    <string name="remove_word_try">Remove</string>
+    <string name="search_result">Search</string>
+    <string name="word_input_hint">Input a word</string>
+    <string name="word_input_not_valid">Input must be a 5-letter word in alphabets</string>
+</resources>
