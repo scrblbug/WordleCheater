@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
                     orientation = LinearLayoutManager.VERTICAL
                 }
                 adapter = WordTryListAdapter(wordTryList)
-                itemAnimator = null
             }
 
         findViewById<Button>(R.id.addButton).setOnClickListener {
@@ -28,8 +27,10 @@ class MainActivity : AppCompatActivity() {
                 wordTryList,
                 findViewById<EditText>(R.id.wordEditText).text.toString()
             )
-            rv.adapter!!.notifyDataSetChanged()
+            rv.adapter!!.notifyItemInserted(wordTryList.size-1)
         }
+
+        val wordValidator = WordValidator(this.applicationContext)
     }
 
     private fun addWordTry(wordTryList: MutableList<WordTry>, wordString: String) {
@@ -42,10 +43,11 @@ class MainActivity : AppCompatActivity() {
         if (word.matches(formatRegex)) {
             wordTryList.add(
                 WordTry(
-                    word.toCharArray().toTypedArray(),
+                    word.toCharArray(),
                     WordTry.DEFAULT_STATUS
                 )
             )
+            findViewById<EditText>(R.id.wordEditText).text.clear()
         } else {
             Toast.makeText(
                 this,

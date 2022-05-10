@@ -3,6 +3,6 @@
     <string name="add_word_try">追加</string>
     <string name="remove_word_try">削除</string>
     <string name="search_result">検索</string>
-    <string name="word_input_hint">単語を入力</string>
+    <string name="word_input_hint">試した単語を入力</string>
     <string name="word_input_not_valid">5文字の英単語を入力してください</string>
 </resources>

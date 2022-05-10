@@ -14,5 +14,5 @@ class WordTryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         itemView.findViewById(R.id.letter5)
     )
 
-    val removeButton: Button = itemView.findViewById<Button>(R.id.removeButton)
+    val removeButton: Button = itemView.findViewById(R.id.removeButton)
 }

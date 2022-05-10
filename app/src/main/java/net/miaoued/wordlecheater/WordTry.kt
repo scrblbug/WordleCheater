@@ -1,9 +1,16 @@
 package net.miaoued.wordlecheater
 
 data class WordTry(
-    val word: Array<Char>,
-    val status: Array<Int>
+    val word: CharArray,
+    val status: IntArray
 ) {
+
+    override fun hashCode(): Int {
+        var result = word.contentHashCode()
+        result = 31 * result + status.contentHashCode()
+        return result
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -16,16 +23,10 @@ data class WordTry(
         return true
     }
 
-    override fun hashCode(): Int {
-        var result = word.contentHashCode()
-        result = 31 * result + status.contentHashCode()
-        return result
-    }
-
     companion object {
-        val LETTER_NOT_IN_USE = 0
-        val LETTER_IN_USE = 1
-        val LETTER_CORRECT = 2
-        val DEFAULT_STATUS = arrayOf(0, 0, 0, 0, 0)
+        const val LETTER_NOT_IN_USE = 0
+        const val LETTER_IN_USE = 1
+        const val LETTER_CORRECT = 2
+        val DEFAULT_STATUS = intArrayOf(0, 0, 0, 0, 0)
     }
 }

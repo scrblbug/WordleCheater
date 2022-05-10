@@ -1,7 +1,6 @@
 package net.miaoued.wordlecheater
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +38,8 @@ class WordTryListAdapter(private val data: MutableList<WordTry>)
 
         holder.removeButton.setOnClickListener {
             data.removeAt(position)
-            notifyDataSetChanged()
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, data.size)
         }
     }
 
