@@ -1,28 +1,30 @@
 package net.miaoued.wordlecheater
 
 data class WordTry(
-    val letters: CharArray,
-    val status: IntArray
+    val letters: CharArray
 ) {
+    val status = IntArray(5){0}
     var mustUse = 0
-    val usables = IntArray(5) {(1 shl 26) - 1}
+    var usables = IntArray(5) {(1 shl 26) - 1}
 
     init {
         rebuild()
     }
 
     private fun rebuild() {
+        mustUse = 0
+        usables = IntArray(5){(1 shl 26) - 1}
         for (i in 0..4) {
             val letterIndex = letters[i].code - 'A'.code
             when (status[i]) {
                 LETTER_NOT_IN_USE -> {
                     for (j in 0..4) {
-                        usables[j] = usables[j] and (((1 shl 26) - 1) xor (1 shl letterIndex)).inv()
+                        usables[j] = usables[j] and (((1 shl 26) - 1) xor (1 shl letterIndex))
                     }
                 }
 
                 LETTER_IN_USE -> {
-                    usables[i] = usables[i] and (((1 shl 26) - 1) xor (1 shl letterIndex).inv())
+                    usables[i] = usables[i] and (((1 shl 26) - 1) xor (1 shl letterIndex))
                     mustUse = mustUse or (1 shl letterIndex)
                 }
 
@@ -61,6 +63,5 @@ data class WordTry(
         const val LETTER_NOT_IN_USE = 0
         const val LETTER_IN_USE = 1
         const val LETTER_CORRECT = 2
-        val DEFAULT_STATUS = IntArray(5) {0}
     }
 }

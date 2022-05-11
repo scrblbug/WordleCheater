@@ -1,5 +1,6 @@
 package net.miaoued.wordlecheater
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
                     orientation = LinearLayoutManager.VERTICAL
                 }
                 adapter = WordTryListAdapter(wordTryList)
+                itemAnimator = null
             }
 
         findViewById<Button>(R.id.addButton).setOnClickListener {
@@ -34,6 +36,17 @@ class MainActivity : AppCompatActivity() {
             val wordValidator = WordValidator(this)
             wordValidator.filterByWordTryList(wordTryList)
 
+            startActivity(
+                Intent(
+                    this,
+                    ResultShowActivity::class.java
+                ).apply {
+                    putStringArrayListExtra(
+                        "validWordList",
+                        ArrayList(wordValidator.validWordList)
+                    )
+                }
+            )
         }
     }
 
@@ -47,8 +60,7 @@ class MainActivity : AppCompatActivity() {
         if (word.matches(formatRegex)) {
             wordTryList.add(
                 WordTry(
-                    word.toCharArray(),
-                    WordTry.DEFAULT_STATUS
+                    word.toCharArray()
                 )
             )
             findViewById<EditText>(R.id.wordEditText).text.clear()
