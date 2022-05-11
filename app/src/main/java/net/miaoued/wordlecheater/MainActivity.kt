@@ -30,7 +30,11 @@ class MainActivity : AppCompatActivity() {
             rv.adapter!!.notifyItemInserted(wordTryList.size-1)
         }
 
-        val wordValidator = WordValidator(this.applicationContext)
+        findViewById<Button>(R.id.searchButton).setOnClickListener {
+            val wordValidator = WordValidator(this)
+            wordValidator.filterByWordTryList(wordTryList)
+
+        }
     }
 
     private fun addWordTry(wordTryList: MutableList<WordTry>, wordString: String) {

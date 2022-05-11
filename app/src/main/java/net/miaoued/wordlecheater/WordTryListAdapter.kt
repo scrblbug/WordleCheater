@@ -20,7 +20,7 @@ class WordTryListAdapter(private val data: MutableList<WordTry>)
 
     override fun onBindViewHolder(holder: WordTryViewHolder, position: Int) {
         for (i in 0..4) {
-            holder.letters[i].text = data[position].word[i].toString()
+            holder.letters[i].text = data[position].letters[i].toString()
             when (data[position].status[i]) {
                 WordTry.LETTER_NOT_IN_USE ->
                     holder.letters[i].setBackgroundColor(Color.GRAY)
@@ -31,7 +31,7 @@ class WordTryListAdapter(private val data: MutableList<WordTry>)
             }
 
             holder.letters[i].setOnClickListener {
-                data[position].status[i] = (data[position].status[i] + 1) % 3
+                data[position].changeStatus(i)
                 notifyItemChanged(position)
             }
         }
